@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <script>
+        //Gives Uncaught TypeError : Cannot read property 'innerHTML' of null
+        var str = document.getElementById("h1").innerHTML
+        console.log(str);
+    </script>
+    <script src="prat.js"></script>
+</head>
+
+<body OnLoAd="(function(){alert('Gotcha');})();alert()">
+    <h1 id="h1">Hiiii</h1>
+    <h2>HMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</h2>
+    <script>
+        alert("I m in DOM at Last Line, But After H1 which has value : " + document.GETlementById("h1").innerHTML)
+        console.log(document.getElementsByTagName("h2").item[0].innerHTML)
+        document.getElementById("h1").innerHTML = "BYE"
+    </script>
+    <script>
+        var items = document.getElementsByTagName("h2")
+        alert(items[0].innerHTML)
+    </script>
+</body>
+
+</html>

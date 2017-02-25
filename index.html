@@ -1,25 +1,66 @@
 <html>
+<!-- 
+When Browser requests a web page, it downloads HTML first of all, which gives it reference of other Resources
+That HTML is then parsed line by line to see what needs to be done if any download required or not
+DOM is not ready yet, It will be parsed and in process it will be built gradually adding elements one-by-one
+if the line is <script> it runs it
+if line is .css src of js, it downloads it and that blocks Ur parsing of DOM, so thats why they say keep it down so that UI is visible by that time and usually JS acts on DOM , which is ready only when it reaches </body>
+Idea is dont keep HEAVY JS at top, because use never get to see UI asap
+Though it changes as it loads
+
+CSS is at top , if u keep it at bottom, it will Be like BLANK COLORLESS HTML and then when CSS downloads and COLOR begins to appear.
+You dont want that !!!!!
+
+See Below example where i have kept a Image and a alert box to show you that It loads and shows as soon as its added or more or less so.
+
+Same is Case is <H1> Tag Which gets added to DOM and Displayed only when 
+
+window.onload is when all downloads is done.
+document.onReady is when Browser has Made Full DOM or you can say Full <body element>
+JS can act on HTML elements or DOM elements for behavior or some animation - event Driven
+No need to download them first and blocking UI.
+
+if U try to refer document.getElementById(AnHTMLTag which we have not added in DOM encountered yet)
+it gives error.
+So usually why we keep $.onready() because brower knows When it has parsed full DOM, <body>
+so, it starts early - rather than waiting for all images to be loaded.
+
+
+-->
 
 <head>
-    <script>
-        //Gives Uncaught TypeError : Cannot read property 'innerHTML' of null
-        var str = document.getElementById("h1").innerHTML
-        console.log(str);
-    </script>
+    <!--
+    Gives Uncaught TypeError : Cannot read property 'innerHTML' of null
+    because H1 is not loaded yet or we have not encountered it yet.
+    document.getElementById is OK
+    document.getelementBYidis not OK - JS is case sensitive, Html is not case sensitive
+    -->
     <script src="prat.js"></script>
+    <!--I kept it deliberately because we see load time increases when i keep it there, Its better down at the end of body when it parses full dom dynamically at least DOM is visible by then
+    thats why it is advisable to keep heavy JS Files down because usually 
+    -->
+    <script src="https://code.angularjs.org/1.6.2/angular.js"></script>
 </head>
 
 <body OnLoAd="(function(){alert('Gotcha');})();alert()">
-    <h1 id="h1">Hiiii</h1>
-    <h2>HMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</h2>
+    <!--see onLoAd is not case sensitive, HTML attributes, Tags are not case sensitive
+    but we keep them small case to comply with xhtml behaviour
+    -->
     <script>
-        alert("I m in DOM at Last Line, But After H1 which has value : " + document.GETlementById("h1").innerHTML)
-        console.log(document.getElementsByTagName("h2").item[0].innerHTML)
+        alert(document.getElementById("img").getAttribute("src"))
+    </script>
+    <h1 id="h1">Hello</h1>
+    <script>
+        //Did you see sunset or not
+        alert(document.getElementById("img").getAttribute("src"))
+    </script> <img id="img" src="http://images.freeimages.com/images/previews/680/sunset-1-1406813.jpg">
+    <script>
+        alert(document.getElementById("img").getAttribute("src"))
+        alert("I m inside <body> after H1 which has value : " + document.getElementById("h1").innerHTML)
         document.getElementById("h1").innerHTML = "BYE"
     </script>
     <script>
-        var items = document.getElementsByTagName("h2")
-        alert(items[0].innerHTML)
+        alert(document.getElementsByTagName("h1").item(0).innerHTML)
     </script>
 </body>
 
